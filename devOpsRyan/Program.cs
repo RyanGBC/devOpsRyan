@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using devOpsRyan.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<devOpsRyanContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("devOpsRyanContext") ?? throw new InvalidOperationException("Connection string 'devOpsRyanContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
